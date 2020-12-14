@@ -44,7 +44,7 @@ gstCamera::gstCamera( const videoOptions& options ) : videoSource(options)
 	mBus        = NULL;
 	mPipeline   = NULL;	
 	mFrameCount = 0;
-	mFormatYUV  = IMAGE_UNKNOWN;
+    mFormatYUV  = IMAGE_UNKNOWN;
 	
 	mBufferRGB.SetThreaded(false);
 }

@@ -61,7 +61,9 @@ imageFormat gst_parse_format( GstStructure* caps )
 		return IMAGE_BAYER_GRBG;
 	else if( strcasecmp(format, "rggb") == 0 )
 		return IMAGE_BAYER_RGGB;
-	
+	else if( strcasecmp(format, "gray8") == 0 )
+        return IMAGE_GRAY8;
+
 	return IMAGE_UNKNOWN;
 }
 
@@ -76,10 +78,12 @@ const char* gst_format_to_string( imageFormat format )
 		case IMAGE_YV12:	return "YV12";
 		case IMAGE_YVYU:	return "YVYU";
 		case IMAGE_UYVY:	return "UYVY";
+		case IMAGE_GRAY8:	return "GRAY8";
 		case IMAGE_BAYER_BGGR:	return "bggr";
 		case IMAGE_BAYER_GBRG:	return "gbrg";
 		case IMAGE_BAYER_GRBG:	return "grbg";
 		case IMAGE_BAYER_RGGB:	return "rggb";
+
 	}
 	
 	return " ";

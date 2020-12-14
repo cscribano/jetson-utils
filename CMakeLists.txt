@@ -21,16 +21,25 @@ else()
 	find_package(CUDA)
 	message("-- CUDA version: ${CUDA_VERSION}")
 
-	set(
-		CUDA_NVCC_FLAGS
-		${CUDA_NVCC_FLAGS}; 
-		-O3 
-		-gencode arch=compute_37,code=sm_37
-		-gencode arch=compute_53,code=sm_53
-		-gencode arch=compute_60,code=sm_60
-		-gencode arch=compute_61,code=sm_61
-		-gencode arch=compute_62,code=sm_62
-	)
+	if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
+		set(
+				CUDA_NVCC_FLAGS
+				${CUDA_NVCC_FLAGS};
+				-O3
+				-gencode arch=compute_50,code=sm_50
+				-gencode arch=compute_53,code=sm_53
+				-gencode arch=compute_62,code=sm_62
+		)
+	else()
+		set(
+				CUDA_NVCC_FLAGS
+				${CUDA_NVCC_FLAGS};
+				-O3
+				-gencode arch=compute_53,code=sm_53
+				-gencode arch=compute_62,code=sm_62
+		)
+
+	endif()
 
 	if(CUDA_VERSION_MAJOR GREATER 9)
 		message("-- CUDA ${CUDA_VERSION_MAJOR} detected, enabling SM_72")
@@ -110,4 +119,4 @@ add_subdirectory(video/video-viewer)
 #add_subdirectory(camera/v4l2-console)
 #add_subdirectory(camera/v4l2-display)
 add_subdirectory(display/gl-display-test)
-add_subdirectory(python)
+#add_subdirectory(python)
